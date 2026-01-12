@@ -19,7 +19,7 @@ class RegisterRequest extends FormRequest
                 'required',
                 'email',
                 'unique:usuarios,correo',
-                'regex:/^(e\d{9}@live\.uleam\.edu\.ec|[a-z]+\.[a-z]+@uleam\.edu\.ec)$/'
+                'regex:/^(e\d{10}@live\.uleam\.edu\.ec|[a-z]+\.[a-z]+@uleam\.edu\.ec)$/'
             ],
             'contraseña' => 'required|min:6',
         ];

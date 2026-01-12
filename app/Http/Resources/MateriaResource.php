@@ -13,13 +13,8 @@ class MateriaResource extends JsonResource
             'nombre' => $this->nombre,
             'codigo' => $this->codigo,
             'descripcion' => $this->descripcion,
-
-            'docente' => [$this->docente ? $this->docente->nombre : null,
-            ],
-
-            'periodo' => [ $this->periodo ? $this->periodo->nombre : null,
-            ],
-
+            'docente' => [$this->docente ? $this->docente->nombre : null,],
+            'periodo' => [ $this->periodo ? $this->periodo->nombre : null,],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

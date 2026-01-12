@@ -24,11 +24,11 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::middleware('auth:sanctum')->group(function () {
-Route::apiResource('usuarios', UsuarioController::class);
-Route::middleware(['auth:sanctum', 'rol:profesor'])->group(function () {
-    Route::apiResource('materias', MateriaController::class);
-});
-Route::apiResource('periodos', PeriodoController::class);
+    Route::apiResource('usuarios', UsuarioController::class);
+    Route::middleware(['auth:sanctum', 'rol:profesor'])->group(function () {
+        Route::apiResource('materias', MateriaController::class);
+    });
+    Route::apiResource('periodos', PeriodoController::class);
 });
 
 

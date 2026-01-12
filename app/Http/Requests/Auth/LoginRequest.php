@@ -17,7 +17,8 @@ class LoginRequest extends FormRequest
             'correo' => [
                 'required',
                 'email',
-                'regex:/^(e\d{9}@live\.uleam\.edu\.ec|[a-z]+\.[a-z]+@uleam\.edu\.ec)$/'
+                // Validación para alumnos (e + 10 digitos) o docentes (texto.texto)
+                'regex:/^(e\d{10}@live\.uleam\.edu\.ec|[a-z]+\.[a-z]+@uleam\.edu\.ec)$/'
             ],
             'contraseña' => 'required'
         ];
@@ -26,7 +27,13 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.regex' => 'El correo debe ser institucional ULEAM.'
+            // Validación de CORREO
+            'correo.required' => 'El correo electrónico es obligatorio.',
+            'correo.email'    => 'Debes ingresar una dirección de correo válida.',
+            'correo.regex'    => 'El correo debe ser institucional ULEAM (@uleam.edu.ec).',
+
+            // Validación de CONTRASEÑA
+            'contraseña.required' => 'La contraseña es obligatoria.'
         ];
     }
 }

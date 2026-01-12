@@ -20,6 +20,11 @@ class usuario extends Authenticatable
     ];
 
     protected $hidden = ['contraseña'];
+    
+    public function getAuthPassword()
+{
+    return $this->contraseña;
+}
 
     public function materiasComoDocente()
     {

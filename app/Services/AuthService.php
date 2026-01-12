@@ -15,27 +15,43 @@ class AuthService
         $this->authRepository = $authRepository;
     }
 
-    public function register(array $data)
-    {
-        $rol = $this->getRolPorCorreo($data['correo']);
-        $data['contraseña'] = Hash::make($data['contraseña']);
-        return $this->authRepository->createUser($data , $rol);
+   public function register(array $data)
+{
+    $data['rol'] = $this->getRolPorCorreo($data['correo']);
+
+    if (!$data['rol']) {
+        throw ValidationException::withMessages([
+            'correo' => 'Correo no autorizado para registro'
+        ]);
     }
+
+
+    $data['contraseña'] = Hash::make($data['contraseña']);
+
+    return $this->authRepository->createUser($data);
+}
 
     public function login(array $data)
-{
-    $user = usuario::where('correo', $data['correo'])->first();
+    {
+        $user = usuario::where('correo', $data['correo'])->first();
 
-    if (!$user || !\Hash::check($data['contraseña'], $user->contraseña)) {
-        return null;
+        if (!$user || !Hash::check($data['contraseña'], $user->contraseña)) {
+            return null;
+        }
+
+        // 1. Generamos el token
+        $token = $user->createToken('api_token')->plainTextToken;
+
+        // 2. Devolvemos un array con AMBOS datos
+        return [
+            'token' => $token,
+            'user' => $user
+        ];
     }
-
-    return $user->createToken('api_token')->plainTextToken;
-}
 
     private function getRolPorCorreo($correo)
     {
-        if (preg_match('/^e\d{9}@live\.uleam\.edu\.ec$/', $correo)) {
+        if (preg_match('/^e\d{10}@live\.uleam\.edu\.ec$/', $correo)) {
             return 'alumno'; 
         }
 

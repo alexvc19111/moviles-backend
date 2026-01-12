@@ -3,21 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\usuario;
-use Illuminate\Support\Facades\Hash;
 
 class AuthRepository
 {
-    public function createUser(array $data, $rol)
+    public function createUser(array $data)
     {
-        $usuario = usuario::create([
-            'nombre' => $data['nombre'],
-            'correo' => $data['correo'],
-            'contraseña' => ($data['contraseña']),
-            'rol' => $rol,
-        ]);
-
-
-        return $usuario;
+        return usuario::create($data);
     }
 
     public function findByCorreo($correo)
