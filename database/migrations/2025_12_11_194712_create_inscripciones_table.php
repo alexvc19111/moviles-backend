@@ -10,15 +10,14 @@ return new class extends Migration {
             $table->id();
 
             $table->foreignId('alumno_id')
-                ->constrained('users')
+                ->constrained('alumnos')
                 ->onDelete('cascade');
 
             $table->foreignId('materia_id')
                 ->constrained('materias')
                 ->onDelete('cascade');
 
-            $table->date('fecha_matricula')->nullable();
-            $table->string('estado')->default('activo');
+           $table->date('fecha_inscripcion')->default(DB::raw('CURRENT_DATE'));
 
             $table->timestamps();
 

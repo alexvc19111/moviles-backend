@@ -25,6 +25,8 @@ class AuthController extends Controller
             'message' => 'Usuario registrado exitosamente',
             'usuario' => $usuario
         ], 201);
+        event(new UsuarioRegistrado($usuario));
+
     }
 
 

@@ -22,10 +22,6 @@ return new class extends Migration {
             $table->text('descripcion')->nullable();
             $table->date('fecha')->nullable();
 
-            $table->foreignId('creado_por')
-                ->constrained('usuarios')
-                ->onDelete('cascade');
-
             $table->timestamps();
         });
     }

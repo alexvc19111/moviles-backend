@@ -15,12 +15,11 @@ class calificacion extends Model
         'nota',
         'descripcion',
         'fecha',
-        'creado_por'
     ];
 
     public function alumno()
     {
-        return $this->belongsTo(usuario::class, 'alumno_id');
+        return $this->belongsTo(alumno::class, 'alumno_id');
     }
 
     public function materia()
@@ -28,8 +27,5 @@ class calificacion extends Model
         return $this->belongsTo(materia::class, 'materia_id');
     }
 
-    public function creador()
-    {
-        return $this->belongsTo(usuario::class, 'creado_por');
-    }
+
 }

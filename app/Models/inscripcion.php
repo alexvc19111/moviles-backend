@@ -12,12 +12,11 @@ class inscripcion extends Model
         'alumno_id',
         'materia_id',
         'fecha_matricula',
-        'estado',
     ];
 
     public function alumno()
     {
-        return $this->belongsTo(usuario::class, 'alumno_id');
+        return $this->belongsTo(alumno::class, 'alumno_id');
     }
 
     public function materia()

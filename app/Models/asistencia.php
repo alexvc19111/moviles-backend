@@ -9,25 +9,22 @@ class asistencia extends Model
     protected $table = 'asistencias';
 
     protected $fillable = [
-        'clase_id',
         'alumno_id',
-        'estado',
-        'observacion',
-        'marcado_por'
+        'materia_id',
+        'faltas',
+        'justificadas',
+        'total_clases'
     ];
 
-    public function clase()
-    {
-        return $this->belongsTo(clase::class, 'clase_id');
-    }
-
+    // Relación con el alumno
     public function alumno()
     {
-        return $this->belongsTo(usuario::class, 'alumno_id');
+        return $this->belongsTo(alumno::class, 'alumno_id');
     }
 
-    public function marcador()
+    // Relación con la materia
+    public function materia()
     {
-        return $this->belongsTo(usuario::class, 'marcado_por');
+        return $this->belongsTo(materia::class, 'materia_id');
     }
 }

@@ -60,4 +60,13 @@ class usuario extends Authenticatable
     {
         return $this->hasMany(device_token::class, 'usuario_id');
     }
+    public function alumno()
+{
+    return $this->hasOne(alumno::class, 'usuario_id');
+}
+public function docente()
+{
+    return $this->hasOne(docente::class);
+}
+
 }

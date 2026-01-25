@@ -8,25 +8,17 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('asistencias', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('clase_id')
-                ->constrained('clases')
-                ->onDelete('cascade');
-
             $table->foreignId('alumno_id')
                 ->constrained('usuarios')
                 ->onDelete('cascade');
-
-            $table->enum('estado', ['presente', 'ausente', 'tarde'])->default('presente');
-            $table->string('observacion')->nullable();
-
-            $table->foreignId('marcado_por')
-                ->constrained('usuarios')
-                ->onDelete('cascade');
+            $table->foreignId('materia_id')->constrained('materias')->onDelete('cascade');
+            $table->integer('faltas')->default(0);
+            $table->integer('justificadas')->default(0);
+            $table->integer('total_clases')->default(0);
 
             $table->timestamps();
 
-            $table->unique(['clase_id', 'alumno_id']);
+            $table->unique(['materia_id', 'alumno_id']);
         });
     }
 
